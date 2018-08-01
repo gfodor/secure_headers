@@ -9,9 +9,12 @@ defmodule SecureHeaders do
 
   @doc "Callback implementation for Plug.call/2"
   def call(conn, options) do
-    case options |> merge? |> merge!(options) |> validate |> get_config(options) do
+    merged_options = options |> merge? |> merge!(options) |> validate
+
+    case
+    |> get_config(merged_options) do
       nil -> halt(conn)
-      _ -> set_headers(conn, options)
+      _ -> set_headers(conn, merged_options)
     end
   end
 
