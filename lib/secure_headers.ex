@@ -11,8 +11,7 @@ defmodule SecureHeaders do
   def call(conn, options) do
     merged_options = options |> merge? |> merge!(options) |> validate
 
-    case
-    |> get_config(merged_options) do
+    case get_config(merged_options) do
       nil -> halt(conn)
       _ -> set_headers(conn, merged_options)
     end
