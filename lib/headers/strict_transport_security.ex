@@ -63,6 +63,7 @@ defmodule SecureHeaders.StrictTrasportSecurity do
   end
 
   defp make_string(sts_config) do
+    result = ""
     max_age = append_max_age(sts_config[:max_age])
     if max_age && Regex.match?(~r/^max-age=\d+$/,max_age) do 
       result = append_max_age(max_age)
